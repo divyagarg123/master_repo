@@ -18,7 +18,7 @@ class AlbumentationImageDataset(Dataset):
         self.aug = A.Compose({
             A.PadIfNeeded(4, 4),
             A.RandomCrop(32, 32),
-            A.Flip(1),
+            A.Flip(-1),
             A.CoarseDropout(1, 8, 8, 1, 8, 8, fill_value=0.473363, mask_fill_value=None),
             A.Normalize((0.49139968, 0.48215841, 0.44653091), (0.24703223, 0.24348513, 0.26158784))
         })

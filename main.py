@@ -150,12 +150,16 @@ def train_and_test_model(model, train_loader, test_loader, device, criterion, op
     return train_losses_all_epochs, train_acc_all_epochs, test_losses_all_epochs, test_acc_all_epochs, pred, target, data, lr_trend
 
 
-def max_lr_finder(batch_size, device, trainset, model, optimizer, criterion):
+def max_lr_finder(batch_size, device, trainset, model, optimizer, criterion, assgn):
     train_loader_noaug = torch.utils.data.DataLoader(AlbumentationImageDataset(trainset, train=False),
                                                      batch_size=batch_size,
                                                      shuffle=True, num_workers=2)
     lr_finder = LRFinder(model, optimizer, criterion, device=device)
-    lr_finder.range_test(train_loader_noaug, start_lr=0.0001, end_lr=1, num_iter=200)
+    if assgn == 9:
+        lr_finder.range_test(train_loader_noaug, start_lr=0.0001, end_lr=1, num_iter=200)
+    else: 
+        if assgn == 8:
+           lr_finder.range_test(train_loader_noaug, start_lr=0.0001, end_lr=3, num_iter=200) 
     lr_finder.plot()
     min_loss = min(lr_finder.history['loss'])
     ler_rate = lr_finder.history['lr'][np.argmin(lr_finder.history['loss'], axis=0)]
@@ -181,7 +185,7 @@ def main():
     elif args.ass == 9:
         model = Transformer().to(device)
     if args.optimizer == 'Adam':
-        optimizer = optim.Adam(model.parameters(), lr=0.01)
+        optimizer = optim.Adam(model.parameters(), lr=0.0001)
     else:
         if args.optimizer == 'SGD':
             optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
@@ -190,7 +194,7 @@ def main():
     else:
         if args.loss == "nll":
             criterion = nn.NLLLoss()
-    max_lr = max_lr_finder(args.batch_size, device, trainset, model, optimizer, criterion)
+    max_lr = max_lr_finder(args.batch_size, device, trainset, model, optimizer, criterion, ass)
     scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer,
                                                     max_lr=max_lr,
                                                     steps_per_epoch=len(train_loader),

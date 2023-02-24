@@ -188,7 +188,7 @@ def main():
         optimizer = optim.Adam(model.parameters(), lr=0.0001)
     else:
         if args.optimizer == 'SGD':
-            optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+            optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9, weight_decay = 0.0001)
     if args.loss == 'cross_ent':
         criterion = nn.CrossEntropyLoss()
     else:

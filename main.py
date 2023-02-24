@@ -159,7 +159,7 @@ def max_lr_finder(batch_size, device, trainset, model, optimizer, criterion, ass
         lr_finder.range_test(train_loader_noaug, start_lr=0.0001, end_lr=1, num_iter=200)
     else: 
         if assgn == 8:
-           lr_finder.range_test(train_loader_noaug, start_lr=0.001, end_lr=3, num_iter=200) 
+           lr_finder.range_test(train_loader_noaug, start_lr=0.001, end_lr=3, num_iter=200, weight_decay = 0.0001) 
     lr_finder.plot()
     min_loss = min(lr_finder.history['loss'])
     ler_rate = lr_finder.history['lr'][np.argmin(lr_finder.history['loss'], axis=0)]

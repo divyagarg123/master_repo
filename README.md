@@ -1,4 +1,4 @@
-# divya_repo
+# master_repo
 
 This the master repo which will be pulled in colab file.
 
@@ -12,7 +12,9 @@ It has te following structure.
 
     ----__init__.py
     
-    ----resnet.py
+    ----custom_resnet.py
+    
+    ----transformer.py
     
 ----utils.py
 

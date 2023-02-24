@@ -39,6 +39,7 @@ def draw_train_test_acc_loss(train_losses, train_acc, test_losses, test_acc):
     axs[1, 0].set_title("Test Loss")
     axs[1, 1].plot(test_acc)
     axs[1, 1].set_title("Test Accuracy")
+    plt.show()
 
 
 def draw_misclassified_images(pred, target, data, main_title):

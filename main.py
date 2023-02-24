@@ -194,7 +194,7 @@ def main():
     else:
         if args.loss == "nll":
             criterion = nn.NLLLoss()
-    max_lr = max_lr_finder(args.batch_size, device, trainset, model, optimizer, criterion, ass)
+    max_lr = max_lr_finder(args.batch_size, device, trainset, model, optimizer, criterion, args.ass)
     scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer,
                                                     max_lr=max_lr,
                                                     steps_per_epoch=len(train_loader),

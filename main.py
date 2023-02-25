@@ -156,7 +156,7 @@ def max_lr_finder(batch_size, device, trainset, model, optimizer, criterion, ass
                                                      shuffle=True, num_workers=2)
     lr_finder = LRFinder(model, optimizer, criterion, device=device)
     if assgn == 9:
-        lr_finder.range_test(train_loader_noaug, start_lr=0.0001, end_lr=1, num_iter=200)
+        lr_finder.range_test(train_loader_noaug, start_lr=0.00001, end_lr=1, num_iter=200)
     else: 
         if assgn == 8:
            lr_finder.range_test(train_loader_noaug, start_lr=0.001, end_lr=3, num_iter=200) 
@@ -185,7 +185,7 @@ def main():
     elif args.ass == 9:
         model = Transformer().to(device)
     if args.optimizer == 'Adam':
-        optimizer = optim.Adam(model.parameters(), lr=0.0001)
+        optimizer = optim.Adam(model.parameters(), lr=0.00001)
     else:
         if args.optimizer == 'SGD':
             optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9, weight_decay = 0.001)

@@ -18,7 +18,7 @@ class Ultimus(nn.Module):
         q = self.q(x)
         v = self.v(x)
         ml = torch.matmul(torch.t(q), k)
-        am = F.softmax(ml / torch.pow(torch.tensor(k.shape[-1]), 0.5))
+        am = F.softmax(ml / torch.pow(torch.tensor(k.shape[-1]), 0.5), dim=-1)
         z = torch.matmul(v, am)
         out = self.out(z)
         return out
